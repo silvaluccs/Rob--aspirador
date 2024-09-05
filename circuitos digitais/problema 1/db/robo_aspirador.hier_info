@@ -1,0 +1,54 @@
+|main
+SenE => SenE.IN3
+SenF => SenF.IN5
+SenD => SenD.IN5
+SenA => SenA.IN1
+a <= segA:segA_inst.out
+b <= segB:segB_inst.out
+c <= segC:segC_inst.out
+d <= segD:segD_inst.out
+e <= segEeG:segEeG_inst.outSegE
+f <= segF:segF_inst.out
+g <= segEeG:segEeG_inst.outSegG
+
+
+|main|segA:segA_inst
+out <= Or1.DB_MAX_OUTPUT_PORT_TYPE
+SenF => Or1.IN0
+SenD => Or1.IN1
+
+
+|main|segB:segB_inst
+out <= And1.DB_MAX_OUTPUT_PORT_TYPE
+SenE => Or1.IN0
+SenF => And1.IN1
+SenD => Or1.IN1
+
+
+|main|segC:segC_inst
+out <= And2.DB_MAX_OUTPUT_PORT_TYPE
+SenF => And2.IN1
+SenD => And1.IN0
+SenD => Or1.IN1
+SenE => And1.IN1
+SenA => And1.IN2
+
+
+|main|segD:segD_inst
+out <= And1.DB_MAX_OUTPUT_PORT_TYPE
+SenF => And1.IN1
+SenE => Nand1.IN0
+SenD => Nand1.IN1
+
+
+|main|segEeG:segEeG_inst
+outSegE <= <GND>
+outSegG <= <GND>
+
+
+|main|segF:segF_inst
+out <= Or1.DB_MAX_OUTPUT_PORT_TYPE
+SenF => Or1.IN0
+SenD => Or1.IN1
+
+

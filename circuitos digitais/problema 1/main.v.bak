@@ -1,0 +1,5 @@
+module main(SenE, SenF, SenD, a, b, c, d, e, f, g);
+	input SenE, SenF, SenD;
+	output a, b, c, d, e, f, g;
+endmodule
+	

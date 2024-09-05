@@ -1,0 +1,8 @@
+module segA(SenF, SenD, out);
+	input SenF, SenD;
+	output out;
+	wire NotSenF;
+
+	not Not1(NotSenF, SenF);
+	or Or1(out, NotSenF, SenD);
+endmodule
