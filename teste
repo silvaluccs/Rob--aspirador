@@ -1,0 +1,140 @@
+module main(
+    input SenE, 
+    input SenF, 
+    input SenD, 
+    input SenA, 
+    input power_switch, // sinal de entrada para o switch de liga/desliga
+    input battery_status, // sinal que indica o status da bateria
+    output a, 
+    output b, 
+    output c, 
+    output d, 
+    output e, 
+    output f, 
+    output g,
+    output led_r, // vermelho: bateria toda descarregada 
+    output led_g, // verde: bateria carregada
+    output led_b  // azul: bateria descarregando
+);
+    // instanciando os segmentos da matriz de led
+    segA segA_inst(
+        .out(a), 
+        .SenF(SenF), 
+        .SenD(SenD), 
+        .power_switch(power_switch) // envia o sinal do botao para controle do segmento
+    );
+
+    segB segB_inst(
+        .out(b), 
+        .SenE(SenE), 
+        .SenF(SenF), 
+        .SenD(SenD), 
+        .power_switch(power_switch)
+    );
+
+    segC segC_inst(
+        .out(c), 
+        .SenF(SenF), 
+        .SenD(SenD), 
+        .SenE(SenE), 
+        .SenA(SenA),
+        .power_switch(power_switch)
+    );
+
+    segD segD_inst(
+        .out(d), 
+        .SenF(SenF), 
+        .SenE(SenE), 
+        .SenD(SenD), 
+        .power_switch(power_switch)
+    );
+
+    segEeG segEeG_inst(
+        .outSegE(e), 
+        .outSegG(g),
+        .power_switch(power_switch)
+    );
+
+    segF segF_inst(
+        .out(f), 
+        .SenF(SenF), 
+        .SenD(SenD), 
+        .power_switch(power_switch)
+    );
+
+    // controle dos leds rgbB baseado no status da bateria e switch
+    assign led_r = ~power_switch & ~battery_status; // led vermelho acende se a bateria toda descarregada
+    assign led_g = power_switch & battery_status;  // verde acende se a bateria estiver carregada
+    assign led_b = power_switch & ~battery_status; // azul acende se a bateria estiver descarregando
+
+endmodule
+
+// Módulo para controle do segmento 'A'
+module segA(
+    output out, 
+    input SenF, 
+    input SenD, 
+    input power_switch
+);
+    // o segmento A acende apenas se o switch estiver ligado e se as entradas SenF e SenD estiverem ativas
+    assign out = power_switch & (SenF & SenD);
+endmodule
+
+// modulo para controle do segmento 'B'
+module segB(
+    output out, 
+    input SenE, 
+    input SenF, 
+    input SenD, 
+    input power_switch
+);
+    // B acende apenas se o switch estiver ligado e se a logica definida de SenE, SenF e SenD for vdd
+    assign out = power_switch & ((SenE & ~SenF) | SenD);
+endmodule
+
+// modulo de controle do segmento 'C'
+module segC(
+    output out, 
+    input SenF, 
+    input SenD, 
+    input SenE, 
+    input SenA, 
+    input power_switch
+);
+    // C acende se o switch estiver ligado 
+    assign out = power_switch & ((SenA & SenE) | (~SenD & SenF));
+endmodule
+
+// modulo para controle de 'D'
+module segD(
+    output out, 
+    input SenF, 
+    input SenE, 
+    input SenD, 
+    input power_switch
+);
+    // D acende se o switch estiver ligado e se a logica de SenE, SenF e SenD for verdadeira
+    assign out = power_switch & ((SenF & ~SenE) | (~SenD));
+endmodule
+
+// modulo de controle dos segmentos 'E' e 'G'
+module segEeG(
+    output outSegE, 
+    output outSegG, 
+    input power_switch
+);
+    // segmentos E e G acendem se o switch estiver ligado
+    assign outSegE = power_switch;  // E acende se power_switch for 1
+    assign outSegG = ~power_switch; // G acende se power_switch for 0
+endmodule
+
+// modulo de controle do segmento 'F'
+module segF(
+    output out, 
+    input SenF, 
+    input SenD, 
+    input power_switch
+);
+    // segmento F acende se o switch estiver ligado e se a logica de SenF e SenD for verdadeira
+    assign out = power_switch & (SenF | ~SenD);
+endmodule
