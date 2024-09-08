@@ -1,8 +1,0 @@
-module segD(out, SenF, SenE, SenD);
-  input SenF, SenE, SenD;
-  output out;
-  wire nand1;
-  
-  nand Nand1(nand1, SenE, SenD);
-  and And1(out, nand1, SenF)
-endmodule
