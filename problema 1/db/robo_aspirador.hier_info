@@ -1,0 +1,83 @@
+|main
+SenE => SenE.IN3
+SenF => SenF.IN5
+SenD => SenD.IN5
+SenA => SenA.IN1
+power_switch => power_switch.IN2
+batery_status => batery_status.IN2
+a << segA:segA_inst.out
+b << segB:segB_inst.out
+c << segC:segC_inst.out
+d << segD:segD_inst.out
+e << segEeG:segEeG_inst.outSegE
+f << segF:segF_inst.out
+g << segEeG:segEeG_inst.outSegG
+led_r << leds_rgb:leds_rgb_inst.out_r
+led_g << leds_rgb:leds_rgb_inst.out_g
+led_b << leds_rgb:leds_rgb_inst.out_b
+
+
+|main|control_sensors:control_sensors_inst
+out <= And1.DB_MAX_OUTPUT_PORT_TYPE
+power => And1.IN0
+batery_status => And1.IN1
+
+
+|main|segA:segA_inst
+out <= Nand1.DB_MAX_OUTPUT_PORT_TYPE
+SenF => Or1.IN0
+SenD => Or1.IN1
+Control => Nand1.IN1
+
+
+|main|segB:segB_inst
+out <= Nand1.DB_MAX_OUTPUT_PORT_TYPE
+SenE => Or1.IN0
+SenF => And1.IN1
+SenD => Or1.IN1
+Control => Nand1.IN1
+
+
+|main|segC:segC_inst
+out <= Nand1.DB_MAX_OUTPUT_PORT_TYPE
+SenF => And2.IN1
+SenD => And1.IN0
+SenD => Or1.IN1
+SenE => And1.IN1
+SenA => And1.IN2
+Control => Nand1.IN1
+
+
+|main|segD:segD_inst
+out <= Nand2.DB_MAX_OUTPUT_PORT_TYPE
+SenF => And1.IN1
+SenE => Nand1.IN0
+SenD => Nand1.IN1
+Control => Nand2.IN1
+
+
+|main|segEeG:segEeG_inst
+outSegE <= Control.DB_MAX_OUTPUT_PORT_TYPE
+outSegG <= Control.DB_MAX_OUTPUT_PORT_TYPE
+Control => outSegE.DATAIN
+Control => outSegG.DATAIN
+
+
+|main|segF:segF_inst
+out <= Nand1.DB_MAX_OUTPUT_PORT_TYPE
+SenF => Or1.IN0
+SenD => Or1.IN1
+Control => Nand1.IN1
+
+
+|main|leds_rgb:leds_rgb_inst
+power => Nor1.IN0
+power => And1.IN0
+batery_status => Nor1.IN1
+batery_status => out_g.DATAIN
+batery_status => And1.IN1
+out_r <= Nor1.DB_MAX_OUTPUT_PORT_TYPE
+out_g <= batery_status.DB_MAX_OUTPUT_PORT_TYPE
+out_b <= And1.DB_MAX_OUTPUT_PORT_TYPE
+
+
