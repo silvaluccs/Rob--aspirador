@@ -1,7 +1,0 @@
-Info (10281): Verilog HDL Declaration information at segA.v(4): object "or1" differs only in case from object "Or1" in the same scope File: /home/aluno/Downloads/circuitos digitais/problema 1/segA.v Line: 4
-Info (10281): Verilog HDL Declaration information at segB.v(4): object "notA" differs only in case from object "NotA" in the same scope File: /home/aluno/Downloads/circuitos digitais/problema 1/segB.v Line: 4
-Info (10281): Verilog HDL Declaration information at segB.v(4): object "or1" differs only in case from object "Or1" in the same scope File: /home/aluno/Downloads/circuitos digitais/problema 1/segB.v Line: 4
-Info (10281): Verilog HDL Declaration information at segB.v(4): object "nor1" differs only in case from object "Nor1" in the same scope File: /home/aluno/Downloads/circuitos digitais/problema 1/segB.v Line: 4
-Info (10281): Verilog HDL Declaration information at segB.v(4): object "and1" differs only in case from object "And1" in the same scope File: /home/aluno/Downloads/circuitos digitais/problema 1/segB.v Line: 4
-Info (10281): Verilog HDL Declaration information at segB.v(4): object "and2" differs only in case from object "And2" in the same scope File: /home/aluno/Downloads/circuitos digitais/problema 1/segB.v Line: 4
-Info (10281): Verilog HDL Declaration information at segB.v(4): object "or2" differs only in case from object "Or2" in the same scope File: /home/aluno/Downloads/circuitos digitais/problema 1/segB.v Line: 4
