@@ -1,6 +1,0 @@
-module buzzer(out, SenE, SenF, SenD, SenA);
-	input SenE, SenF, SenD, SenA;
-	output out;
-	
-	and And1(out, SenE, SenF, SenD, SenA);
-endmodule 
